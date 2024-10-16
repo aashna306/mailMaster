@@ -2,7 +2,9 @@ import React from 'react'
 import "./signup.scss"
 const SignUp = () => {
   return (
-    <div>SignUp</div>
+    <div>
+      <button onClick={SignUp()}>sign in</button>
+    </div>
   )
 }
 
