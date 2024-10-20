@@ -1,40 +1,21 @@
-// // separate.js
+import {GoogleGenerativeAI} from "@google/generative-ai";
+import dotenv from "dotenv";
+dotenv.config();
+const gemini_api_key = process.env.API_KEY;
+const googleAI = new GoogleGenerativeAI(gemini_api_key);
+const geminiModel = googleAI.getGenerativeModel({
+  model: "gemini-1.5-flash",
+});
 
-// // Function to categorize emails by domain
-// export const categorizeEmailsByDomain = (emails, domains) => {
-//     const categorizedEmails = {};
-  
-//     // Initialize the categorizedEmails object with domain names
-//     domains.forEach(domain => {
-//       categorizedEmails[domain.domainName] = [];
-//     });
-  
-//     // Categorize emails based on the domain
-//     emails.forEach(email => {
-//       const emailDomain = email.from.split('@')[1]; // Extract domain from the 'from' field
-  
-//       // Check if the domain is in the list of domains
-//       if (categorizedEmails[emailDomain]) {
-//         categorizedEmails[emailDomain].push(email);
-//       } else {
-//         // Group emails with unknown domains in 'Other'
-//         if (!categorizedEmails['Other']) {
-//           categorizedEmails['Other'] = [];
-//         }
-//         categorizedEmails['Other'].push(email);
-//       }
-//     });
-  
-//     return categorizedEmails;
-//   };
-  
-//   // Function to group emails by specified categories (if needed)
-//   export const groupEmails = (categorizedEmails) => {
-//     // Example: You can implement grouping logic here if needed
-    
-//     return categorizedEmails; // Return as is for now
-//   };
-  
-
-// // separate.js
+export const generate = async (question) => {
+  try {
+    const prompt = question;
+    const result = await geminiModel.generateContent(prompt);
+    const response = result.response;
+    console.log(response.text());
+    return response.text();
+  } catch (error) {
+    console.log("response error", error);
+  }
+};
 

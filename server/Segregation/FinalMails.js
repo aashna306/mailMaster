@@ -1,41 +1,27 @@
-// import { fetchEmails } from './FetchMails.js';
-// import { groupEmails } from './GeminiSeparte.js';
-// import axios from 'axios';
+import fetch from 'node-fetch';
 
-// export const organizeEmailsByDomain = async () => {
-//   try {
-//     // Fetch emails using the function from FetchMails.js
-//     const emails = await fetchEmails();
-    
-//     // Fetch domains from the backend
-//     const domainResponse = await axios.get('http://localhost:5000/info/domains');
-//     const domains = domainResponse.data;  // Assuming this returns an array of domains
+export const finalMails = async () => {
+  try {
+    // Fetch domains from the API with credentials
+    const domainResponse = await fetch('http://localhost:5000/info/domains', {
+      method: 'GET',
+      credentials: 'include', 
+    });
 
-//     // Organize emails by domains using the groupEmails function
-//     const groupedEmails = groupEmails(emails, domains);
+    if (!domainResponse.ok) {
+      throw new Error(`Error fetching domains: ${domainResponse.status} ${domainResponse.statusText}`);
+    }
 
-//     // Count the number of emails for each domain
-//     const domainEmailCount = Object.entries(groupedEmails).map(([domain, emailList]) => {
-//       return {
-//         domainName: domain,
-//         emailCount: emailList.length,
-//         emails: emailList
-//       };
-//     });
+    const data = await domainResponse.json();
 
-//     // Output the organized email data
-//     domainEmailCount.forEach(({ domainName, emailCount, emails }) => {
-//       console.log(`Domain: ${domainName}`);
-//       console.log(`Number of Emails: ${emailCount}`);
-//       console.log('Emails:', emails);
-//       console.log('------------------------------');
-//     });
-//   } catch (error) {
-//     console.error('Error organizing emails by domain:', error);
-//   }
-// };
+    const domains = data.domains;
 
-// // Export the function without calling it here
-// export default organizeEmailsByDomain;
+    console.log(domains);
+    return domains;
 
+  } catch (error) {
+    console.error('Error organizing emails by domain:', error.message);
+  }
+};
 
+export default finalMails;

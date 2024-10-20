@@ -1,6 +1,8 @@
 import express from 'express';
 import { generateAuthUrl, getOAuth2Token, fetchEmails } from '../Segregation/FetchMails.js';
-// import organizeEmailsByDomain from '../Segregation/FinalMails.js';
+import { generate } from '../Segregation/GeminiSeparte.js';
+import finalMails from '../Segregation/FinalMails.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 
 const router = express.Router();
 
@@ -37,14 +39,17 @@ router.route('/emails').get(async (req, res) => {
   }
 });
 
-// // Route to organize emails by domain
-// router.route('/emails/organized').get(async (req, res) => {
-//   try {
-//     const organizedEmails = await organizeEmailsByDomain(); // Call the function and capture the result
-//     res.status(200).json({ success: true, data: organizedEmails });
-//   } catch (error) {
-//     handleErrorResponse(res, error);
-//   }
-// });
+router.route('/api/content').post(async (req, res) => {
+  try{
+    let data = req.body.question;
+    var result = await generate(data);
+    console.log(result);
+    return res.json({"result" : result});
+  }catch(err){
+    console.log(err);
+  }
+  
+})
+router.route("/check/:id").get(isAuthenticated,finalMails);
 
 export default router;
