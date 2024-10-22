@@ -1,13 +1,15 @@
 import fs from 'fs';
 import { google } from 'googleapis';
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 
 // Gmail API Setup
-const SCOPES = [`${process.env.GOOGLE_SCOPES}`];
-const credentials = JSON.parse(fs.readFileSync("C:/Kabir Projects/Gmail Sambhalo/server/Segregation/credentials.json"));
-const { client_secret, client_id, redirect_uris } = credentials.web;
-const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+const SCOPES = [process.env.GOOGLE_SCOPES];
+const oAuth2Client = new google.auth.OAuth2(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  process.env.GOOGLE_REDIRECT_URI
+);
 
 // Generate Auth URL
 export const generateAuthUrl = () => {
@@ -30,7 +32,6 @@ export const getOAuth2Token = (code) => {
     });
   });
 };
-
 
 // Fetch Emails
 export const fetchEmails = async () => {
@@ -96,4 +97,3 @@ export const fetchEmails = async () => {
     throw new Error('Error fetching emails');
   }
 };
-
