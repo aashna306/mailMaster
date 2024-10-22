@@ -7,15 +7,23 @@ const geminiModel = googleAI.getGenerativeModel({
   model: "gemini-1.5-flash",
 });
 
-export const generate = async (question) => {
+export const generate = async (question, emails) => {
   try {
-    const prompt = question;
+    if (!emails || Object.keys(emails).length === 0) {
+      throw new Error("No emails provided to group.");
+    }
+
+    const emailList = JSON.stringify(emails, null, 2);
+    const prompt = `${question}\n\nHere is the list of grouped emails:\n${emailList}`;
+
     const result = await geminiModel.generateContent(prompt);
-    const response = result.response;
-    console.log(response.text());
-    return response.text();
+    const response = await result.response.text();
+
+    console.log(response);
+    return response;
   } catch (error) {
-    console.log("response error", error);
+    console.log("Error in generate function:", error.message);
+    return "Failed to process the request.";
   }
 };
 

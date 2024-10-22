@@ -50,5 +50,4 @@ const domainSchema = new mongoose.Schema(
 
 const Domain = mongoose.model("Domain", domainSchema);
 
-// Export both models
 export { Email, Domain };

@@ -26,24 +26,7 @@ const OrganizedEmails = () => {
 
   return (
     <div>
-      <h2>Organized Emails by Domain</h2>
-      {emailData.map((domain) => (
-        <div key={domain.domainName}>
-          <h3>Domain: {domain.domainName}</h3>
-          <p>Email Count: {domain.emailCount}</p>
-          <ul>
-            {domain.emails.map((email, index) => (
-              <li key={index}>
-                <strong>From:</strong> {email.from} <br />
-                <strong>To:</strong> {email.to} <br />
-                <strong>Subject:</strong> {email.subject} <br />
-                <strong>Message:</strong> {email.message} <br />
-                <a href={email.url} target="_blank" rel="noopener noreferrer">View Email</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      Home
     </div>
   );
 };

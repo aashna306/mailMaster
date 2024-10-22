@@ -10,7 +10,7 @@ const isAuthenticated = async (req, res, next) => {
     }
 
     const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    req.user = { userId: decode.userId }; // Attach userId to req.user
+    req.user = { userId: decode.userId }; 
 
     next();
   } catch (error) {

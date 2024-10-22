@@ -1,8 +1,10 @@
 import fs from 'fs';
 import { google } from 'googleapis';
+import dotenv from "dotenv";
+dotenv.config();
 
 // Gmail API Setup
-const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
+const SCOPES = [`${process.env.GOOGLE_SCOPES}`];
 const credentials = JSON.parse(fs.readFileSync("C:/Kabir Projects/Gmail Sambhalo/server/Segregation/credentials.json"));
 const { client_secret, client_id, redirect_uris } = credentials.web;
 const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
@@ -37,7 +39,7 @@ export const fetchEmails = async () => {
   try {
     const response = await gmail.users.messages.list({
       userId: 'me',
-      maxResults: 10, // Adjust as needed
+      maxResults: 10, // Number emails to fetch
     });
 
     const messages = response.data.messages;
@@ -55,7 +57,6 @@ export const fetchEmails = async () => {
 
         const headers = email.data.payload.headers;
 
-        // Extract "From", "To", and "Subject" from headers
         const fromHeader = headers.find(header => header.name === 'From')?.value || 'Unknown';
         const toHeader = headers.find(header => header.name === 'To')?.value || 'Unknown';
         const subjectHeader = headers.find(header => header.name === 'Subject')?.value || 'No Subject';
@@ -80,18 +81,15 @@ export const fetchEmails = async () => {
         // Construct URL to view email in Gmail
         const emailUrl = `https://mail.google.com/mail/u/0/#inbox/${message.id}`;
 
-        // Return an object with the extracted details
         return {
           from: fromHeader,
           to: toHeader,
           subject: subjectHeader,
           message: truncatedMessage || 'No message body found',
-          url: emailUrl, // Direct link to the email in Gmail
+          url: emailUrl,
         };
       })
     );
-
-    // Fetch domains and categorize emails
 
     return emailDetails;
   } catch (error) {

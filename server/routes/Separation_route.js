@@ -50,6 +50,6 @@ router.route('/api/content').post(async (req, res) => {
   }
   
 })
-router.route("/check/:id").get(isAuthenticated,finalMails);
+router.route("/check/:userId").get(isAuthenticated,finalMails);
 
 export default router;

@@ -1,10 +1,9 @@
 import { Email, Domain } from "../models/Email_domain_model.js";
 
-// Add a new email and password
 export const addEmail = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const userId = req.user.userId; // Access userId correctly
+    const userId = req.user.userId; 
 
     const existingEmail = await Email.findOne({ email });
     if (existingEmail) {
@@ -19,10 +18,10 @@ export const addEmail = async (req, res) => {
   }
 };
 
-// Get all additional emails for the logged-in user
+
 export const getEmails = async (req, res) => {
   try {
-    const userId = req.user.userId; // Access userId correctly
+    const userId = req.user.userId; 
     const emails = await Email.find({ userId });
     res.status(200).json({ emails });
   } catch (error) {
@@ -30,11 +29,11 @@ export const getEmails = async (req, res) => {
   }
 };
 
-// Add a new domain
+
 export const addDomain = async (req, res) => {
   try {
     const { domainName } = req.body;
-    const userId = req.user.userId; // Access userId correctly
+    const userId = req.user.userId; 
 
     const existingDomain = await Domain.findOne({ domainName });
     if (existingDomain) {
@@ -49,12 +48,23 @@ export const addDomain = async (req, res) => {
   }
 };
 
-// Get all domains for the logged-in user
-export const getDomains = async (req, res) => {
+
+export const getDomainsName = async (req, res) => {
   try {
-    const userId = req.user.userId; // Access userId correctly
+    const userId = req.user.userId; 
     const domains = await Domain.find({ userId });
     res.status(200).json({ domains });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+export const getDomains = async (req, res) => {
+  try {
+    const userId = req.user.userId; 
+    const domains = await Domain.find({ userId });
+    return domains; 
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
