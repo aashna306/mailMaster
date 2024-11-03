@@ -1,6 +1,11 @@
 import express from "express";
 import isAuthenticated from "../middleware/isAuthenticated.js";
-import { addEmail, getEmails, addDomain, getDomainsName } from "../controllers/Email_domain_controller.js";
+import {
+  addEmail,
+  getEmails,
+  addDomain,
+  getDomainsName,
+} from "../controllers/Email_domain_controller.js";
 
 const router = express.Router();
 

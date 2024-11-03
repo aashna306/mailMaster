@@ -1,0 +1,142 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #808080;
+  transition: background-color 0.5s ease;
+}
+
+.signup-container:hover {
+  background-color: #707070;
+}
+
+.bgimg {
+  background-image: url("../../../public/emailBG.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 70vw;
+  height: 90vh;
+  position: relative;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s ease;
+}
+
+
+
+.signup-form {
+  background-color: #d9d9d9;
+  opacity: 90%;
+  width: 40vw;
+  max-width: 600px;
+  height: 90vh;
+  padding: 15px 15px 10px 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+
+  p{
+    button{
+        width: auto;
+        background-color: #d9d9d9;
+    }
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2px;
+    font-family: "Agbamulo", sans-serif;
+    color: black;
+    transition: color 0.5s;
+  }
+
+  h1:hover {
+    color: #f64141;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+  }
+
+  a {
+    color: #007bff;
+    text-decoration: underline;
+    transition: color 0.3s;
+  }
+
+  a:hover {
+    color: #0056b3;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    color: black;
+    font-size: 14px;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    transition: border-color 0.3s;
+
+    &:focus {
+      border-color: #f64141;
+      outline: none;
+    }
+  }
+
+  .create-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    width: 60%;
+    padding: 8px;
+    background-color: #f64141;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px auto 0;
+    transition: background-color 0.3s, transform 0.3s;
+
+    &:hover {
+      background-color: #fa2c2c;
+      transform: scale(1.05);
+    }
+  }
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.form-group {
+  flex: 1;
+}

@@ -1,0 +1,124 @@
+.contain {
+  background: url("../../../public/emailBG.jpg");
+}
+
+.authorize-container {
+  padding: 20px;
+  width: 50vw;
+  height: 100vh;
+  text-align: center;
+  margin: 0 auto;
+  background-color: #f5f7fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .loading-text {
+    font-size: 16px;
+    color: #888;
+    text-align: center;
+  }
+
+  .email-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .email-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #eef5ff;
+    }
+
+    .email-text {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .authorize-button {
+      padding: 8px 12px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+
+      &.loading {
+        background-color: #ccc;
+        cursor: not-allowed;
+      }
+
+      &:hover:not(.loading) {
+        background-color: #45a049;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .success-message {
+    color: #4caf50;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .authorized-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+
+    .authorized-item {
+      font-size: 16px;
+      color: #333;
+      background-color: #e0ffe6;
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-bottom: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .no-authorized {
+      font-size: 16px;
+      color: #888;
+      text-align: center;
+    }
+  }
+
+  .fetch-button {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    &:hover {
+      background-color: #0069d9;
+    }
+  }
+}
